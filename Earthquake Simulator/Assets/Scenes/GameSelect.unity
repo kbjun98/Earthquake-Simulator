@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 13987073}
   - component: {fileID: 13987072}
   m_Layer: 5
-  m_Name: RigthStageButton
+  m_Name: Button_right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -991,7 +991,7 @@ GameObject:
   - component: {fileID: 2088665892}
   - component: {fileID: 2088665891}
   m_Layer: 5
-  m_Name: LeftStageButton
+  m_Name: Button_left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1124,7 +1124,7 @@ GameObject:
   - component: {fileID: 2123318619}
   - component: {fileID: 2123318618}
   m_Layer: 5
-  m_Name: StageButton
+  m_Name: Button_Stage1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
