@@ -29,7 +29,7 @@ namespace Tests
       Title title;
       SceneManager.LoadScene("GameTitle");
       title = GameObject.Find("Scene_main").GetComponent<Title>();
-      title.ButtonInput();      //입력 들어오면 화면 이동하는 함수
+      // KeyDownEvent(anyInput) 입력 전달
       Scene scene = SceneManager.GetActiveScene();
       Assert.AreEqual("StageSelect",scene.name);
     }
@@ -39,28 +39,26 @@ namespace Tests
       SceneManager.LoadScene("GameTitle");
       var title = GameObject.Find("Scene_main").GetComponent<Title>();
       // KeyDownEvent(ESC);
-      Assert.IsTrue(title.ApplicationQuit());
+      Assert.IsTrue(title.OnApplicationQuit());
     }
 
     public void 메인화면_음악재생()
     {
       //오브젝트 오디오클립 넣은상태
-      var obj = GameObject.Find("오브젝트 이름").GetComponent<AudioSource>();
-      Assert.AreEqual(true,obj.isPlaying);
+      var obj = GameObject.Find("SoundManager").GetComponent<AudioSource>();
+      Assert.IsTrue(obj.isPlaying);
     }
 
     public void 메인화면_음악반복재생()
     {
-      var obj = GameObject.Find("오브젝트 이름").GetComponent<AudioSource>();
+      var obj = GameObject.Find("SoundManager").GetComponent<AudioSource>();
       Assert.IsTrue(obj.loop);
     }
 
     public void 메인화면_클릭효과음()
     {
-      var obj = GameObject.Find("오브젝트 이름");
-      var src = obj.GetComponent<AudioSource>();
-      //obj.PlayOnClick();     클릭 시 사운드 재생 함수
-      Assert.IsTrue(src.isPlaying);
+      var obj = GameObject.Find("Scene_main").GetComponent<Title>();
+      Assert.IsTrue(obj.SoundPlay());
     }
 
     public void 스테이지창_UI출력()
@@ -125,7 +123,7 @@ namespace Tests
 
     public void 스테이지창_음악재생()
     {
-      var obj = GameObject.Find("오브젝트 이름").GetComponent<AudioSource>();
+      var obj = GameObject.Find("SoundManager").GetComponent<AudioSource>();
       Assert.IsTrue(obj.isPlaying);
     }
 
@@ -211,10 +209,10 @@ namespace Tests
     {
       var obj = GameObject.Find("Button_Difficulty").GetComponent<스크립트이름>();
       obj.ButtonPushed();      입력 들어오면 난이도 변경하는 함수.
-      int difficulty = obj.difficulty;        // 0 = easy, 1 = hard. 초기값은 0
-      Assert.AreEqual(1,difficulty);
+      bool isHard = obj.isHard;        // 0 = easy, 1 = hard. 초기값은 0
+      Assert.IsTrue(isHard);
       obj.ButtonPushed();
-      Assert.AreEqual(0,difficulty);
+      Assert.IsTrue(!isHard);
     }
 
     public void 브리핑_이전결과출력()
@@ -261,7 +259,7 @@ namespace Tests
       SceneManager.LoadScene("GameTitle");
       SceneManager.LoadScene("GameSelect");
       SceneManager.LoadScene("GameOption");
-      var obj = GameObject.Find("Scene_main").GetComponent<AudioSource>();
+      var obj = GameObject.Find("BGM_main").GetComponent<AudioSource>();
       Assert.IsTrue(obj.isPlaying);
     }
 
