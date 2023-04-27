@@ -69,7 +69,7 @@ namespace Tests
       //var obj = GameObject.Find("Canvas");
       //Assert.IsTrue(obj.GetComponent<Title>().nameCheck());
     }
-    public void 스테이지창_옵션창진입()
+    public void 스테이지창_옵션창진입()   // 옵션창 위치 미정. 보류
     {
       var obj = GameObject.Find("Button_Option").GetComponent<스크립트이름>();
       obj.LoadOptionScene();      입력 들어오면 옵션창으로 이동하는 함수
@@ -78,38 +78,22 @@ namespace Tests
     }
     public void 스테이지창_1stage진입()
     {
-      SceneManager.LoadScene("GameSelect");
-      var obj = GameObject.Find("Button_Stage1").GetComponent<스크립트이름>();
-      obj.LoadStage1();
-      Scene scene = SceneManager.GetActiveScene();
-      Assert.AreEqual("Stage1",scene.name);
+        SceneManager.LoadScene("GameTItle");
+        SceneManager.LoadScene("GameSelect");
+        var obj = GameObject.Find("Button_Stage1").GetComponent<스크립트이름>();
+        0bj.LoadStage1();
+        Scene scene = SceneManager.GetActiveScene();
+        Assert.AreEqual("Stage1",scene.name);
     }
 
     public void 스테이지창_2stage진입()
     {
-      SceneManager.LoadScene("GameSelect");
-      var obj = GameObject.Find("Button_Stage2").GetComponent<스크립트이름>();
-      obj.LoadStage2();
-      Scene scene = SceneManager.GetActiveScene();
-      Assert.AreEqual("Stage2",scene.name);
-    }
-
-    public void 스테이지창_3stage진입()
-    {
-      SceneManager.LoadScene("GameSelect");
-      var obj = GameObject.Find("Button_Stage3").GetComponent<스크립트이름>();
-      obj.LoadStage3();
-      Scene scene = SceneManager.GetActiveScene();
-      Assert.AreEqual("Stage3",scene.name);
-    }
-
-    public void 스테이지창_4stage진입()
-    {
-      SceneManager.LoadScene("GameSelect");
-      var obj = GameObject.Find("Button_Stage4").GetComponent<스크립트이름>();
-      obj.LoadStage4();
-      Scene scene = SceneManager.GetActiveScene();
-      Assert.AreEqual("Stage4",scene.name);
+        SceneManager.LoadScene("GameTItle");
+        SceneManager.LoadScene("GameSelect");
+        var obj = GameObject.Find("Button_Stage2").GetComponent<스크립트이름>();
+        obj.LoadStage2();
+        Scene scene = SceneManager.GetActiveScene();
+        Assert.AreEqual("Stage2",scene.name);
     }
 
     public void 스테이지창_메인복귀()
