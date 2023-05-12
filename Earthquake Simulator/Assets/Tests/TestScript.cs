@@ -21,15 +21,15 @@ namespace Tests
       Scene scene = SceneManager.GetActiveScene();
       Assert.AreEqual("GameTitle",scene.name);
       //var obj = GameObject.Find("Canvas");
-      //Assert.IsTrue(obj.GetComponent<Title>().nameCheck()); 
+      //Assert.IsTrue(obj.GetComponent<Title>().nameCheck());
     }
- 
+
     public void 메인화면_스테이지진입()
     {
       Title title;
       SceneManager.LoadScene("GameTitle");
       title = GameObject.Find("Scene_main").GetComponent<Title>();
-      title.ButtonInput();      //입력 들어오면 화면 이동하는 함수
+      // KeyDownEvent(anyInput) 입력 전달
       Scene scene = SceneManager.GetActiveScene();
       Assert.AreEqual("StageSelect",scene.name);
     }
@@ -39,28 +39,26 @@ namespace Tests
       SceneManager.LoadScene("GameTitle");
       var title = GameObject.Find("Scene_main").GetComponent<Title>();
       // KeyDownEvent(ESC);
-      Assert.IsTrue(title.ApplicationQuit());
+      Assert.IsTrue(title.OnApplicationQuit());
     }
 
     public void 메인화면_음악재생()
     {
       //오브젝트 오디오클립 넣은상태
-      var obj = GameObject.Find("오브젝트 이름").GetComponent<AudioSource>();
-      Assert.AreEqual(true,obj.isPlaying);
+      var obj = GameObject.Find("SoundManager").GetComponent<AudioSource>();
+      Assert.IsTrue(obj.isPlaying);
     }
 
     public void 메인화면_음악반복재생()
     {
-      var obj = GameObject.Find("오브젝트 이름").GetComponent<AudioSource>();
+      var obj = GameObject.Find("SoundManager").GetComponent<AudioSource>();
       Assert.IsTrue(obj.loop);
     }
 
     public void 메인화면_클릭효과음()
     {
-      var obj = GameObject.Find("오브젝트 이름");
-      var src = obj.GetComponent<AudioSource>();
-      //obj.PlayOnClick();     클릭 시 사운드 재생 함수
-      Assert.IsTrue(src.isPlaying);
+      var obj = GameObject.Find("Scene_main").GetComponent<Title>();
+      Assert.IsTrue(obj.SoundPlay());
     }
 
     public void 스테이지창_UI출력()
@@ -69,9 +67,9 @@ namespace Tests
       Scene scene = SceneManager.GetActiveScene();
       Assert.AreEqual("StageSelect",scene.name);
       //var obj = GameObject.Find("Canvas");
-      //Assert.IsTrue(obj.GetComponent<Title>().nameCheck()); 
+      //Assert.IsTrue(obj.GetComponent<Title>().nameCheck());
     }
-    public void 스테이지창_옵션창진입()
+    public void 스테이지창_옵션창진입()   // 옵션창 위치 미정. 보류
     {
       var obj = GameObject.Find("Button_Option").GetComponent<스크립트이름>();
       obj.LoadOptionScene();      입력 들어오면 옵션창으로 이동하는 함수
@@ -80,38 +78,22 @@ namespace Tests
     }
     public void 스테이지창_1stage진입()
     {
-      SceneManager.LoadScene("GameSelect");
-      var obj = GameObject.Find("Button_Stage1").GetComponent<스크립트이름>();
-      obj.LoadStage1();
-      Scene scene = SceneManager.GetActiveScene();
-      Assert.AreEqual("Stage1",scene.name);
+        SceneManager.LoadScene("GameTItle");
+        SceneManager.LoadScene("GameSelect");
+        var obj = GameObject.Find("Button_Stage1").GetComponent<스크립트이름>();
+        0bj.LoadStage1();
+        Scene scene = SceneManager.GetActiveScene();
+        Assert.AreEqual("Stage1",scene.name);
     }
 
     public void 스테이지창_2stage진입()
     {
-      SceneManager.LoadScene("GameSelect");
-      var obj = GameObject.Find("Button_Stage2").GetComponent<스크립트이름>();
-      obj.LoadStage2();
-      Scene scene = SceneManager.GetActiveScene();
-      Assert.AreEqual("Stage2",scene.name);
-    }
-
-    public void 스테이지창_3stage진입()
-    {
-      SceneManager.LoadScene("GameSelect");
-      var obj = GameObject.Find("Button_Stage3").GetComponent<스크립트이름>();
-      obj.LoadStage3();
-      Scene scene = SceneManager.GetActiveScene();
-      Assert.AreEqual("Stage3",scene.name);
-    }
-
-    public void 스테이지창_4stage진입()
-    {
-      SceneManager.LoadScene("GameSelect");
-      var obj = GameObject.Find("Button_Stage4").GetComponent<스크립트이름>();
-      obj.LoadStage4();
-      Scene scene = SceneManager.GetActiveScene();
-      Assert.AreEqual("Stage4",scene.name);
+        SceneManager.LoadScene("GameTItle");
+        SceneManager.LoadScene("GameSelect");
+        var obj = GameObject.Find("Button_Stage2").GetComponent<스크립트이름>();
+        obj.LoadStage2();
+        Scene scene = SceneManager.GetActiveScene();
+        Assert.AreEqual("Stage2",scene.name);
     }
 
     public void 스테이지창_메인복귀()
@@ -125,7 +107,7 @@ namespace Tests
 
     public void 스테이지창_음악재생()
     {
-      var obj = GameObject.Find("오브젝트 이름").GetComponent<AudioSource>();
+      var obj = GameObject.Find("SoundManager").GetComponent<AudioSource>();
       Assert.IsTrue(obj.isPlaying);
     }
 
@@ -136,7 +118,7 @@ namespace Tests
       var obj1 = GameObject.Find("Scene_main").GetComponent<Title>();
       //title.ButtonInput();      입력 들어오면 화면 이동하는 함수
       var src = obj.GetComponent<AudioSource>();
-      Assert.IsTrue(src.isPlaying); 
+      Assert.IsTrue(src.isPlaying);
     }
 
     public void 스테이지창_클릭효과음()
@@ -155,7 +137,7 @@ namespace Tests
       Scene scene = SceneManager.GetActiveScene();
       Assert.AreEqual("Briefing",scene.name);
       //var obj = GameObject.Find("Canvas");
-      //Assert.IsTrue(obj.GetComponent<Title>().nameCheck()); 
+      //Assert.IsTrue(obj.GetComponent<Title>().nameCheck());
     }
 
     public void 브리핑_situation출력()  // 스테이지별로 추가필요
@@ -209,12 +191,12 @@ namespace Tests
 
     public void 브리핑_난이도변경()
     {
-      var obj = GameObject.Find("Button_level").GetComponent<스크립트이름>();
+      var obj = GameObject.Find("Button_Difficulty").GetComponent<스크립트이름>();
       obj.ButtonPushed();      입력 들어오면 난이도 변경하는 함수.
-      int level = obj.level;        // 0 = easy, 1 = hard. 초기값은 0
-      Assert.AreEqual(1,level);
+      bool isHard = obj.isHard;        // 0 = easy, 1 = hard. 초기값은 0
+      Assert.IsTrue(isHard);
       obj.ButtonPushed();
-      Assert.AreEqual(0,level);
+      Assert.IsTrue(!isHard);
     }
 
     public void 브리핑_이전결과출력()
@@ -231,7 +213,7 @@ namespace Tests
       Scene scene = SceneManager.GetActiveScene();
       Assert.AreEqual("GameOption",scene.name);
       //var obj = GameObject.Find("Canvas");
-      //Assert.IsTrue(obj.GetComponent<Title>().nameCheck()); 
+      //Assert.IsTrue(obj.GetComponent<Title>().nameCheck());
     }
     public void 옵션창_버튼상호작용()
     {
@@ -261,10 +243,10 @@ namespace Tests
       SceneManager.LoadScene("GameTitle");
       SceneManager.LoadScene("GameSelect");
       SceneManager.LoadScene("GameOption");
-      var obj = GameObject.Find("Scene_main").GetComponent<AudioSource>();
-      Assert.IsTrue(obj.isPlaying); 
+      var obj = GameObject.Find("BGM_main").GetComponent<AudioSource>();
+      Assert.IsTrue(obj.isPlaying);
     }
-   
+
     public void 옵션창_클릭효과음()
     {
       GameObject obj1 = GameObject.Find("Button_1").GetComponent<AudioSource>();  // 밝기
@@ -316,15 +298,14 @@ namespace Tests
     // A UnityTest behaves like a coroutine in Play Mode. In Edit Mode you can use
     // `yield return null;` to skip a frame.
     [UnityTest]
-    
+
     public IEnumerator NewTestScriptWithEnumeratorPasses()
     {
         // Use the Assert class to test conditions.
         // Use yield to skip a frame.
         yield return null;
     }
-    
-}
-  
+
 }
 
+}

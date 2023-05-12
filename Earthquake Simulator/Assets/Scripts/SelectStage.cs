@@ -17,6 +17,8 @@ public class SelectStage: MonoBehaviour
 
     public void OnStageClick()
     {
+        var sound = GameObject.Find("Sound_confirm").GetComponent<AudioSource>();
+        sound.Play();
         SceneManager.LoadScene("Briefing");
     }
 }

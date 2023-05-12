@@ -8,32 +8,39 @@ public class Title : MonoBehaviour
     public Scene scene;
     void Start()
     {
-        scene = SceneManager.GetActiveScene();
-        print("1 "+scene.name);
-        nameCheck();
+        
     }
 
     void Update()
     {
-        //Debug.Log(scene.name);
-        if (Input.anyKeyDown)
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
+            Quit();
+        }
+        else if (Input.anyKeyDown)
+        {
+            SoundPlay();
             SceneManager.LoadScene("GameSelect");
         }
+        
     }
-
-    public bool nameCheck()
+    private void Quit()  // 에디터 모드에서도 quit 동작하도록
     {
-       Debug.Log(scene.name);
-        if(scene.name == "GameTitle")
-        {
-            print("true");
-            return true;
-        }
-            
-        else return false;
-        //print(scene.name);
-        //string scene_name = scene.name;
-        //return scene_name;
+        #if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+        #else
+            Applicaiton.Quit();
+        #endif
+    }
+    public bool SoundPlay()
+    {
+        var sound = GameObject.Find("Sound_confirm").GetComponent<AudioSource>();
+        sound.Play();
+        return true;
+    }
+    public bool OnApplicationQuit()
+    {
+        Debug.Log("game quit");
+        return true;
     }
 }

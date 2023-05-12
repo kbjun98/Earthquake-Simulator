@@ -14,4 +14,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Briefing.unity
     guid: 66cadaf094081d5468cfbd1a1ea63b03
+  - enabled: 1
+    path: Assets/Scenes/Stage1.unity
+    guid: 07a106ad8df6abc4ca1420f312b17585
+  - enabled: 1
+    path: Assets/Scenes/hh.unity
+    guid: 742e29beedc23ac40a585c9e67aeaccf
   m_configObjects: {}
