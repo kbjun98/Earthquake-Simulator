@@ -13,10 +13,14 @@ public class PlayerController : MonoBehaviour
     private float currentCameraRotationX = 0;
     public float cameraRotationLimit;
     public float jumpForce;
+
+    private Item itemEquiped;
+    private Inventory inventory;
     // Start is called before the first frame update
     void Start()
     {
         playerRigidbody = GetComponent<Rigidbody>();
+        inventory= GetComponent<Inventory>();
     }
 
     // Update is called once per frame
@@ -25,6 +29,21 @@ public class PlayerController : MonoBehaviour
         Move();
         CameraRotation();
         CharacterRotation();
+        ItemEquip();
+    }
+
+    private void ItemEquip()
+    {
+        float wheelInput = Input.GetAxis("Mouse ScrollWheel");
+        if (wheelInput > 0) {
+            Debug.Log(wheelInput);
+            inventory.changeItem(1);
+        }
+        else if (wheelInput < 0)
+        {
+            Debug.Log(wheelInput);
+            inventory.changeItem(-1);
+        }
     }
 
     private void CharacterRotation()
@@ -62,4 +81,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Item"))
+        {
+            inventory.addItem(other.gameObject.GetComponent<Item>());
+        }
+    }
 }
