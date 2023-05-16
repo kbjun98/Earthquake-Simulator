@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Sound
   - Item
+  - EventCheck
+  - Door
   layers:
   - Default
   - TransparentFX

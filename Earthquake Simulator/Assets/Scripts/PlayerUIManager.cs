@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class PlayerUIManager : MonoBehaviour
 {
-<<<<<<< HEAD
     public PlayerHealth playerHealth;
     public Image hpBarImage;
     public Image fadeImage;
@@ -78,18 +77,5 @@ public class PlayerUIManager : MonoBehaviour
             yield return new WaitForSeconds(0.01f);
             fadeImage.color = new Color(0,0,0,fadeVal);
         }
-=======
-    // Start is called before the first frame update
-    public PlayerHealth playerHealth;
-    public Image hpBarImage;
-    void Start()
-    {
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        hpBarImage.fillAmount= Mathf.Clamp(playerHealth.getCurrentHPRatio(),0,playerHealth.maxHP);
->>>>>>> cb3dcd3490ef5f8543a027c058185c7ba7a7f6aa
     }
 }

@@ -37,7 +37,7 @@ public class Event_Fire : MonoBehaviour
             {
                 //Debug.Log("실내 화재발생");
                 fire_inside.SetActive(true);
-                EventSystem.GetComponent<EventManager>().isBurning = true;
+                EventSystem.GetComponent<EventManager>().isBurning = true;      // 실외 불은 끌 필요 없으므로 체크 X
             }
                 
             if (random_outside > 50)            // 복도의 불은 꼭 끌 필요는 없음

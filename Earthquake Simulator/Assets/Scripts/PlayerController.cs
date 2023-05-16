@@ -13,25 +13,17 @@ public class PlayerController : MonoBehaviour
     private float currentCameraRotationX = 0;
     public float cameraRotationLimit;
     public float jumpForce;
-<<<<<<< HEAD
     public bool optionDisabled = true;
     
     private Item itemEquiped;
     private Inventory inventory;
 
-=======
-
-    private Item itemEquiped;
-    private Inventory inventory;
-    // Start is called before the first frame update
->>>>>>> cb3dcd3490ef5f8543a027c058185c7ba7a7f6aa
     void Start()
     {
         playerRigidbody = GetComponent<Rigidbody>();
         inventory= GetComponent<Inventory>();
     }
 
-<<<<<<< HEAD
     void Update()
     {
         Move();
@@ -40,15 +32,6 @@ public class PlayerController : MonoBehaviour
         
         if (optionDisabled)
             CameraRotation();
-=======
-    // Update is called once per frame
-    void Update()
-    {
-        Move();
-        CameraRotation();
-        CharacterRotation();
-        ItemEquip();
->>>>>>> cb3dcd3490ef5f8543a027c058185c7ba7a7f6aa
     }
 
     private void ItemEquip()
@@ -79,11 +62,7 @@ public class PlayerController : MonoBehaviour
         currentCameraRotationX -= cameraRotationX;
         currentCameraRotationX = Mathf.Clamp(currentCameraRotationX, -cameraRotationLimit, cameraRotationLimit);
 
-<<<<<<< HEAD
         mainCamera.transform.localEulerAngles = new Vector3(currentCameraRotationX , 0, 0);
-=======
-        mainCamera.transform.localEulerAngles = new Vector3(currentCameraRotationX, 0, 0);
->>>>>>> cb3dcd3490ef5f8543a027c058185c7ba7a7f6aa
     }
 
     private void Move()
@@ -111,8 +90,4 @@ public class PlayerController : MonoBehaviour
             inventory.addItem(other.gameObject.GetComponent<Item>());
         }
     }
-<<<<<<< HEAD
-
-=======
->>>>>>> cb3dcd3490ef5f8543a027c058185c7ba7a7f6aa
 }
