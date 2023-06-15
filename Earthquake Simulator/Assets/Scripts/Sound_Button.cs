@@ -21,7 +21,7 @@ public class Sound_Button : MonoBehaviour
     {
         
     }
-    public bool Button_Click()
+    public void Button_Click()
     {
         var sound = GameObject.Find("Sound_click").GetComponent<AudioSource>();
         sound.Play();
@@ -35,6 +35,5 @@ public class Sound_Button : MonoBehaviour
             stage1.SetActive(true);
             stage2.SetActive(false);
         }
-        return true;
     }
 }

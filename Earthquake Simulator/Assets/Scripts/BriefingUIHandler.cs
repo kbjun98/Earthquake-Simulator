@@ -6,19 +6,21 @@ using UnityEngine.SceneManagement;
 public class BriefingUIHandler : MonoBehaviour
 {
     public GameObject briefingUI;
-    private GameObject situation, objective, map;
+    private GameObject situation, objective, map, hint;
 
     void Awake()
     {
         situation = GameObject.Find("Image_Situation");
         objective = GameObject.Find("Image_Objective");
         map = GameObject.Find("Image_Map");
+        hint = GameObject.Find("Image_Hint");
     }
     void Start()
     {
         situation.SetActive(true);
         objective.SetActive(false);
         map.SetActive(false);
+        hint.SetActive(false);
     }
 
     void Update()
@@ -55,17 +57,27 @@ public class BriefingUIHandler : MonoBehaviour
         situation.SetActive(true);
         objective.SetActive(false);
         map.SetActive(false);
+        hint.SetActive(false);
     }
     public void OnObjectiveClick()
     {
         situation.SetActive(false);
         objective.SetActive(true);
         map.SetActive(false);
+        hint.SetActive(false);
     }
     public void OnMapClick()
     {
         situation.SetActive(false);
         objective.SetActive(false);
         map.SetActive(true);
+        hint.SetActive(false);
+    }
+    public void OnHintClick()
+    {
+        situation.SetActive(false);
+        objective.SetActive(false);
+        map.SetActive(false);
+        hint.SetActive(true);
     }
 }

@@ -24,8 +24,10 @@ public class DoorOpen : MonoBehaviour
     {
         if (open)
         {
+            gameObject.GetComponent<AudioSource>().enabled = true;
             Quaternion targetRotation = Quaternion.Euler(0, doorOpenAngle, 0);
             transform.localRotation = Quaternion.Slerp(transform.localRotation, targetRotation, smoot * Time.deltaTime);
+           
         }
         else
         {

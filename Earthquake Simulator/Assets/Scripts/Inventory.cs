@@ -1,22 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
     public ItemEquipmentUI equpimentUI;
+    public PlayerHand playerHand;
+    public PlayerHealth playerHealth;
     private List<Item> items = new List<Item>();
-    private int itemEquiped;
-    // Start is called before the first frame update
+    private int itemEquiped=-1;
+
+    public bool haveExtinguisher;
+    public GameObject extinguisher;
+    //public AudioClip sound_extinguish;
+
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        haveExtinguisher = false;
     }
 
     public void changeItem(int next)
@@ -26,10 +27,17 @@ public class Inventory : MonoBehaviour
             Debug.Log("No Item. Cannot change item.");
             return;
         }
+        else if(items.Count == 1)
+        {
+            return;
+        }
+        removeItemEffect(items[itemEquiped]);   //
         itemEquiped += 1;
         itemEquiped = itemEquiped%(items.Count);
-        Debug.Log(itemEquiped);
-        equpimentUI.setItemEquiped(items[itemEquiped]);
+        Item currentItem = items[itemEquiped];
+        playerHealth.setDefense(currentItem);
+        equpimentUI.setItemEquiped(currentItem);
+        playerHand.setItemEquiped(currentItem);
         return;
     }
 
@@ -39,11 +47,28 @@ public class Inventory : MonoBehaviour
         {
             itemEquiped=0;
             items.Add(newItem);
-            equpimentUI.setItemEquiped(items[0]);
+            playerHealth.setDefense(newItem);
+            equpimentUI.setItemEquiped(newItem);
+            playerHand.setItemEquiped(newItem);
         }
         else
         {
             items.Add(newItem);
+        }
+    }
+
+    public Item getEquippedItem()
+    {
+        if(items.Count==0) return null;
+        Item item = items[itemEquiped];
+        return item;
+    }
+
+    private void removeItemEffect(Item item)
+    {
+        if(GameManager.hardMode&&item.itemIndex==1)
+        {
+            RenderSettings.fogDensity = GameManager.darkFog;
         }
     }
 }

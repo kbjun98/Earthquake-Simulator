@@ -4,14 +4,13 @@ using UnityEngine;
 
 public class ItemSpawner : MonoBehaviour
 {
-    public Transform[] spots;
-    public ItemDB itemDB;
-    public int itemIndex;
-    void Start()
+    
+    public List<Transform> spots;
+    public GameObject item;
+    void Awake()
     {
-        int randomSpot = Random.Range(0, spots.Length);
-        GameObject tmp = Instantiate(itemDB.items[itemIndex]);
-        tmp.transform.position = spots[randomSpot].position;
+        int randomSpot = Random.Range(0, spots.Count);
+        Instantiate(item, spots[randomSpot]);
     }
 
     void Update()

@@ -8,6 +8,15 @@ TagManager:
   - Item
   - EventCheck
   - Door
+  - Elevator
+  - Fire
+  - Valve
+  - Fuse
+  - Call
+  - Desk
+  - Floor
+  - Towel
+  - EarthQuakeObject
   layers:
   - Default
   - TransparentFX

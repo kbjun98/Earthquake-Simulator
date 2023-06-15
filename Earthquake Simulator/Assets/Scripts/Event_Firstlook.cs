@@ -23,7 +23,7 @@ public class Event_Firstlook : MonoBehaviour
     }
     private void teleport()
     {
-        player.transform.position = new Vector3(4, 2.7f, 3);
+        player.transform.position = new Vector3(-4.5f, 2.7f, 0.4f);
         Debug.Log("TELEPORT");
     }
 

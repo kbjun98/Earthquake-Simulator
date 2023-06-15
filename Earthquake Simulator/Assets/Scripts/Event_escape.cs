@@ -8,41 +8,22 @@ public class Event_escape : MonoBehaviour
 {
     public GameObject EventCheck;
     public Image fadeImage;
+    private GameObject EventSystem, player;
 
-    void Start()
+    private void Awake()
     {
-        
+      EventSystem = GameObject.Find("EventSystem");
+      player = GameObject.Find("Player");
     }
-
-
-    void Update()
-    {
-        
-    }
-
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.transform.tag == "Player")
-        {   
-            EventCheck.GetComponent<EventCheck>().escaped_stairs = true;
-            Debug.Log("계단으로 탈출.");
-            StartCoroutine(FadeIn());
-        }
-        
-
-    IEnumerator FadeIn()
-    {
-        fadeImage.enabled= true;
-        float fadeVal = 0;
-        while(fadeVal < 1.0f)
+        if (other.transform.tag == "Player")
         {
-            fadeVal += 0.01f;
-            yield return new WaitForSeconds(0.01f);
-            fadeImage.color = new Color(0,0,0,fadeVal);
+            Debug.Log("계단으로 탈출.");
+            EventCheck.GetComponent<EventCheck>().escaped_stairs = true;
+            EventCheck.GetComponent<EventCheck>().HP = player.GetComponent<PlayerHealth>().currentHP;
+            EventSystem.GetComponent<EventManager>().GameOver();
         }
-        yield return new WaitForSeconds(2.0f);
-        SceneManager.LoadScene("Result");
-    }
     }
 }

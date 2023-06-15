@@ -14,8 +14,13 @@ public class Item : MonoBehaviour
 {
     public ItemType itemType;
     public int itemIndex;
-    public float periodSpeed = 3.0f;
-    public float pitch = 3.0f;
+    public float renderScale = 1.0f;
+    public float fireDefense;
+    public float rockFallDefense;
+    public float smokeDefense;
+    private int ItemNumber;
+    private GameObject player;
+    private Useable useable;
 
     public Item()
     {
@@ -27,33 +32,47 @@ public class Item : MonoBehaviour
         itemIndex= index;
     }
 
-    public bool Use()
+    public void Use()
     {
-        return false;
+        if(useable != null)
+        {
+            useable.use();
+        }
     }
+
+    // 아이템 인덱스값 배열 순으로 초기화(by itemDB)
     public void setItemIndex(int index)
     {
         this.itemIndex = index;
     }
 
+
     private void Start()
     {
         gameObject.tag= "Item";
+        WhatIsThis wis = gameObject.GetComponent<WhatIsThis>();
+        if( wis != null )
+        {
+            ItemNumber = wis.number;
+        }
+        player = GameObject.Find("Player");
+        useable = GetComponent<Useable>();
     }
     private void Update()
     {
-        //periodMove();
     }
 
-    private void periodMove()
-    {
-        Vector3 pos = transform.position;
-        pos.y += pitch * Mathf.Sin(Time.time * periodSpeed) / 1000;
-        transform.position = pos;
-    }
 
     private void OnTriggerEnter(Collider other)
     {
-        Destroy(this.gameObject);
+        if(other.tag=="Player")
+        {
+            if (ItemNumber == 1)
+            {
+                player.GetComponent<Inventory>().haveExtinguisher = true;
+            }
+            Destroy(gameObject);
+
+        }
     }
 }

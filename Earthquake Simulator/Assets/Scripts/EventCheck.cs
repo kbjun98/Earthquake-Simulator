@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EventCheck : MonoBehaviour
 {
-
+    public float HP;
     public bool isBurning = false;
 
     //// [if isBurning is true] ////////
@@ -18,6 +18,7 @@ public class EventCheck : MonoBehaviour
     public bool escaped_elevator = false;
     public bool escaped_stairs = false;
     public bool escaped_window = false;
+    public bool used_towel = false;
 
     private GameObject[] eventCheck;
 
@@ -25,20 +26,9 @@ public class EventCheck : MonoBehaviour
     {
         eventCheck = GameObject.FindGameObjectsWithTag("EventCheck");
 
-        if(eventCheck.Length >= 2)        
+        if(eventCheck.Length >= 2)
             Destroy(this.gameObject);
-        
+
         DontDestroyOnLoad(transform.gameObject);
-    }
-  
-    void Start()
-    {
-        
-    }
-
-
-    void Update()
-    {
-        
     }
 }

@@ -1,34 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class EventManager : MonoBehaviour
 {
     //for sound volume test
     public AudioSource audioSource;
+    public Image fadeImage;
+    public GameObject Floor1;
 
-    public bool isBurning = false;
-
-    //// [if isBurning is true] ////////
-    public bool isExtinguished = false;
-    public bool isReported = false;
-    ////////////////////////////////////
-
-    public bool triggered_valve = false;
-    public bool triggered_electric = false;
-
-    public bool escaped_elevator = false;
-    public bool escaped_stairs = false;
-    public bool escaped_window = false;
-
-
-    
-    void Start()
-    {
-
-    }
-
-    
     void Update()
     {
         if (Input.GetKey(KeyCode.Escape))
@@ -40,8 +22,24 @@ public class EventManager : MonoBehaviour
         {
             audioSource.Play();
         }
-        
     }
 
-    
+    IEnumerator FadeIn()
+    {
+        fadeImage.enabled = true;
+        float fadeVal = 0;
+        while (fadeVal < 1.0f)
+        {
+            fadeVal += 0.005f;
+            yield return new WaitForSeconds(0.01f);
+            fadeImage.color = new Color(0, 0, 0, fadeVal);
+        }
+        yield return new WaitForSeconds(3.0f);
+        SceneManager.LoadScene("Result");
+    }
+
+    public void GameOver()
+    {
+        StartCoroutine(FadeIn());
+    }
 }

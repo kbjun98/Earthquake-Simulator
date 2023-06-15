@@ -6,12 +6,19 @@ public class ItemEquipmentUI : MonoBehaviour
 {
     public ItemDB itemDB;
     private List<GameObject> equipments = new List<GameObject>();
-    // Start is called before the first frame update
+
+    
     void Start()
     {
         foreach (GameObject equipment in itemDB.items)
         {
             GameObject tmp = Instantiate(equipment, transform);
+            Item tmpItem= tmp.GetComponent<Item>();
+            if(tmpItem != null)
+            {
+                float renderScale = tmpItem.renderScale;
+                tmp.transform.localScale = new Vector3(renderScale,renderScale,renderScale);
+            }
             tmp.layer = LayerMask.NameToLayer("HandEquipment");
             tmp.transform.Rotate(0, -45, 30);
             tmp.SetActive(false);
@@ -19,7 +26,6 @@ public class ItemEquipmentUI : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
     }

@@ -7,7 +7,7 @@ using UnityEngine;
     {
         public float _moveSpeed = 5f;
         public float _rotationSpeed = 5f;
-        public bool _wheelAcceleration = true; // 마우스 휠로 이동속도 증가/감소
+        public bool _wheelAcceleration = true;
 
         public KeyCode _moveForward = KeyCode.W;
         public KeyCode _moveBackward = KeyCode.S;
@@ -19,7 +19,7 @@ using UnityEngine;
         public KeyCode _run = KeyCode.LeftShift;
         public KeyCode _cursorLock = KeyCode.LeftAlt;
 
-        public bool _isActivated = true;     // 활성화 플래그
+        public bool _isActivated = true;
         public bool _isCursorVisible = true;
 
         private Vector3 _moveDir;
@@ -60,7 +60,6 @@ using UnityEngine;
 
         private void GetInputs()
         {
-            // 1. Movement
             _moveDir = new Vector3(0, 0, 0);
 
             if (Input.GetKey(_moveForward)) _moveDir.z += 1f;
@@ -86,7 +85,6 @@ using UnityEngine;
                 }
             }
 
-            // 2. Rotation
             float mX = Input.GetAxisRaw("Mouse X");
             float mY = -Input.GetAxisRaw("Mouse Y");
 
@@ -98,7 +96,6 @@ using UnityEngine;
             if (Input.GetKeyDown(_cursorLock))
             {
                 _isCursorVisible = !_isCursorVisible;
-
                 Cursor.lockState = !_isCursorVisible ? CursorLockMode.Locked : CursorLockMode.None;
                 Cursor.visible = _isCursorVisible;
             }
@@ -113,7 +110,6 @@ using UnityEngine;
             Vector3 trnEuler = transform.localEulerAngles;
             Vector3 rigEuler = _rig.localEulerAngles;
 
-            // Rotate X(Up & Down)
             float nextX = trnEuler.x + _rotation.x * rotSpeed;
 
             if (nextX > 180f) nextX -= 360f;
@@ -121,7 +117,6 @@ using UnityEngine;
 
             transform.localEulerAngles = new Vector3(nextX, trnEuler.y, trnEuler.z);
 
-            // Rotate Y(Left & Right)
             float nextY = rigEuler.y + _rotation.y * rotSpeed;
             _rig.localEulerAngles = new Vector3(rigEuler.x, nextY, rigEuler.z);
         }

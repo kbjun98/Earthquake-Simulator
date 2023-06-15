@@ -5,6 +5,8 @@ using UnityEngine;
 public class ItemDB : MonoBehaviour
 {
     public GameObject[] items;
+
+    // ItemDB 내 item index 초기화
     void Start()
     {
         int i = 0;

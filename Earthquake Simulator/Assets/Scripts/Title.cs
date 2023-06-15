@@ -8,23 +8,24 @@ public class Title : MonoBehaviour
     public Scene scene;
     void Start()
     {
-        
+
     }
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Quit();
+           // Quit();
         }
         else if (Input.anyKeyDown)
         {
             SoundPlay();
             SceneManager.LoadScene("GameSelect");
         }
-        
     }
-    private void Quit()  // 에디터 모드에서도 quit 동작하도록
+    /*
+
+    private void Quit()
     {
         #if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;
@@ -32,6 +33,7 @@ public class Title : MonoBehaviour
             Applicaiton.Quit();
         #endif
     }
+    */
     public bool SoundPlay()
     {
         var sound = GameObject.Find("Sound_confirm").GetComponent<AudioSource>();

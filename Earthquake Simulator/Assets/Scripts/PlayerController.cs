@@ -11,13 +11,24 @@ public class PlayerController : MonoBehaviour
     public Camera mainCamera;
     public float lookSensitivity;
     private float currentCameraRotationX = 0;
+
     public float cameraRotationLimit;
     public float jumpForce;
     public bool optionDisabled = true;
+
+    public float xRotation;
+    public float yRotation;
     
     private Item itemEquiped;
     private Inventory inventory;
 
+    private AudioSource sound_walk;
+
+    private bool isMoving = false;
+    void Awake()
+    {
+        sound_walk = GameObject.Find("Sound_moving").GetComponent<AudioSource>();
+    }
     void Start()
     {
         playerRigidbody = GetComponent<Rigidbody>();
@@ -32,18 +43,34 @@ public class PlayerController : MonoBehaviour
         
         if (optionDisabled)
             CameraRotation();
+
+        if (isMoving)
+        {
+            sound_walk.enabled = true;
+        }
+        else
+        {
+            sound_walk.enabled = false;
+        }
+    }
+
+    private void useItem()
+    {
+        if(Input.GetMouseButtonDown(0))
+        {
+            Item equippedItem = inventory.getEquippedItem();
+            equippedItem.Use();
+        }
     }
 
     private void ItemEquip()
     {
         float wheelInput = Input.GetAxis("Mouse ScrollWheel");
         if (wheelInput > 0) {
-            Debug.Log(wheelInput);
             inventory.changeItem(1);
         }
         else if (wheelInput < 0)
         {
-            Debug.Log(wheelInput);
             inventory.changeItem(-1);
         }
     }
@@ -57,12 +84,18 @@ public class PlayerController : MonoBehaviour
 
     private void CameraRotation()
     {
-        float xRotation = Input.GetAxisRaw("Mouse Y");
-        float cameraRotationX = xRotation * lookSensitivity;
-        currentCameraRotationX -= cameraRotationX;
-        currentCameraRotationX = Mathf.Clamp(currentCameraRotationX, -cameraRotationLimit, cameraRotationLimit);
+        xRotation = Input.GetAxisRaw("Mouse Y");
+        float cameraRotationX = -xRotation * lookSensitivity;
+        mainCamera.transform.Rotate(cameraRotationX, 0, 0);
+        Quaternion currentCameraRotation = mainCamera.transform.rotation;
 
-        mainCamera.transform.localEulerAngles = new Vector3(currentCameraRotationX , 0, 0);
+        if (currentCameraRotation.x > cameraRotationLimit) {
+            currentCameraRotation.x = cameraRotationLimit;
+        }
+        else if (currentCameraRotation.x < -cameraRotationLimit)        {
+            currentCameraRotation.x = -cameraRotationLimit;
+        }
+        mainCamera.transform.rotation = currentCameraRotation;
     }
 
     private void Move()
@@ -81,6 +114,22 @@ public class PlayerController : MonoBehaviour
         {
             playerRigidbody.AddForce(Vector3.up*jumpForce);
         }
+
+        if(velocity == new Vector3(0,0,0))
+        {
+            //Debug.Log("player stopped");
+            isMoving = false;
+            //var sound = GameObject.Find("Sound_moving").GetComponent<AudioSource>();
+            //sound.Stop();
+        }
+        else
+        {
+            //Debug.Log("player moving");
+            isMoving = true;
+            
+        }
+
+        
     }
 
     private void OnTriggerEnter(Collider other)
