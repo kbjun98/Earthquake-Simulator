@@ -1,0 +1,2 @@
+Plasterboard[[:space:]]Type[[:space:]]1[[:space:]]Albedo.bmp filter=lfs diff=lfs merge=lfs -text
+Plasterboard[[:space:]]Type[[:space:]]1[[:space:]]Normal.bmp filter=lfs diff=lfs merge=lfs -text
