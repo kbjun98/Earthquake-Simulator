@@ -1,7 +1,7 @@
 # Earthquake-Simulator Manual
 
 ## Earthquake-Simulator<br/><br/>
-![스크린샷 2023-05-19 065954](https://github.com/kbjun98/Earthquake-Simulator/assets/110660221/8c1f35f3-cd2f-47ca-8fa1-f3b3d628daed)
+![스크린샷 2023-05-19 065954](https://github.com/kbjun98/Earthquake-Simulator/assets/110660221/8c1f35f3-cd2f-47ca-8fa1-f3b3d628daed)  
 Earthquake-Simulator는 사용자에게 지진 상황을 경험하고 대처방안을 학습할 수 있는 게임입니다.
 
 ## 게임 진행<br/><br/>
